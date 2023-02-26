@@ -15,7 +15,7 @@ export default function Home() {
     e.preventDefault();
     try {
       const data = { // TODO add regex to remove . and convert to lowercase
-        "acronym": acronym,
+        "id": acronym,
         "expanded": expanded,
         "info": info,
       }
@@ -53,7 +53,7 @@ export default function Home() {
           <input className="rounded-3xl w-3/4 h-12 px-4 text-gray-700 leading-tight mb-6 bg-light shadow-light-field focus:shadow-inverted-light-field focus:outline-none active:shadow-none transition-shadow ease-in-out duration-200"
           id="expanded" type="text" placeholder="Expanded" onChange={(e) => setExpanded(e.target.value)}/>
           <textarea className="rounded-3xl py-3 w-3/4 h-44 px-4 text-gray-700 leading-tight mb-6 bg-light shadow-light-field focus:shadow-inverted-light-field focus:outline-none active:shadow-none transition-shadow ease-in-out duration-200" 
-          id="info" type="text" placeholder="Additional Info (optional)" onChange={(e) => setInfo(e.target.value)}/>
+          id="info" type="text" placeholder="Link (optional)" onChange={(e) => setInfo(e.target.value)}/>
           <div className="w-100 relative h-16">
             <button onClick={handleSubmit} className="rounded-3xl w-1/2 bottom-6 absolute bg-cyan text-white text-center h-12 py-3 font-bold mx-auto left-0 right-0 shadow-inverted-light-field active:shadow-light-field hover:cursor-pointer transition-shadow ease-in-out duration-100">
               Add Acronym

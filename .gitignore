@@ -1,3 +1,7 @@
 # PocketBase Data
 
 /db/pb_data
+
+# Extension
+
+/extension/node_modules
