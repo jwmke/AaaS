@@ -14,8 +14,16 @@ export default function Home() {
   let handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const data = { // TODO add regex to remove . and convert to lowercase
-        "id": acronym,
+      let finalAcronym = `${acronym}`; // deep copy through string interpolation
+      finalAcronym = finalAcronym.replace(/['"\s\.]+/g, '').toUpperCase();
+      if (finalAcronym.length > 15) {
+        throw new Error('Acronym cannot be longer than 15 characters.');
+      } else {
+        finalAcronym = `${finalAcronym}${"0".repeat(15-finalAcronym.length)}`;
+      }
+
+      const data = {
+        "id": finalAcronym,
         "expanded": expanded,
         "info": info,
       }

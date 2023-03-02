@@ -65,11 +65,9 @@ class Expander extends HTMLElement {
       this.styleElement.textContent = styled(this.markerPosition);
     }
     if (name === "text") {
-      this.shadowRoot.getElementById("expander").textContent = "";
+      this.shadowRoot.getElementById("expander").textContent = "No Acronym Found";
       let key = this.getAttribute("text").replace(/['"\s\.]+/g, '').toUpperCase();
-      if (key.length > 15) {
-        this.shadowRoot.getElementById("expander").textContent = "No Acronym Found";
-      } else {
+      if (key.length <= 15) {
         key = `${key}${"0".repeat(15-key.length)}`;
         fetch(`http://127.0.0.1:8090/api/collections/acronyms/records/${key}`).then(r => r.text()).then(result => {
         const jsonRes = JSON.parse(result);
