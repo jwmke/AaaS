@@ -14,9 +14,16 @@ const styled = ({ display = "none", left = 0, top = 0 }) => `
     z-index: 9999;
     transform: translate(-50%);
     box-shadow: 6px 6px 8px 0 rgba(0, 0, 0, .15);
+    color: #000000;
   }
-  .text-marker {
-    fill: white;
+  a {
+    color: #000;
+    text-decoration: underline;
+  }
+  a:hover {
+    color: #00e0d4;
+    text-decoration: none;
+    cursor: pointer;
   }
 `;
 
@@ -74,7 +81,15 @@ class Expander extends HTMLElement {
           if (jsonRes.code) {
             this.shadowRoot.getElementById("expander").textContent = "No Acronym Found";
           } else {
-            this.shadowRoot.getElementById("expander").textContent = jsonRes.expanded;
+            if (jsonRes.info) {
+              this.shadowRoot.getElementById("expander").innerHTML = `
+              <a href="${jsonRes.info}" target="_blank">
+                ${jsonRes.expanded}
+              </a>
+              `;
+            } else {
+              this.shadowRoot.getElementById("expander").textContent = jsonRes.expanded;
+            }
           }
         })
       }

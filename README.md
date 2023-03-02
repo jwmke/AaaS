@@ -10,7 +10,6 @@ Admin Web App
 
 ## TODO
 
-* Add tooltip info hyperlink functionality
 * Deploy Pocketbase to fly.io - https://github.com/pocketbase/pocketbase/discussions/537
 * Deploy web app to Netlify
 * Publish extension to the Chrome store
