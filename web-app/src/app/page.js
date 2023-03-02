@@ -7,7 +7,7 @@ export default function Home() {
   const [acronym, setAcronym] = useState("");
   const [expanded, setExpanded] = useState("");
   const [info, setInfo] = useState("");
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState({text: "", isError: false});
 
   const pb = new PocketBase('http://127.0.0.1:8090');
 
@@ -37,27 +37,34 @@ export default function Home() {
         document.getElementById('expanded').value = "";
         setInfo("");
         document.getElementById('info').value = "";
-        setMessage("Acronym successfully added");
+        setMessage({text: "Acronym Successfully Added", isError: false});
       } else {
-        setMessage("An error occured");
+        setMessage({text: "An Error Occured", isError: true});
       }
       setTimeout(()=>{
-        setMessage("");
+        setMessage({text: "", isError: false});
       }, 2000);
     } catch (err) {
-      setMessage("An error occured");
+      setMessage({text: "An Error Occured", isError: true});
       setTimeout(()=>{
-        setMessage("");
+        setMessage({text: "", isError: false});
       }, 2000);
     }
   };
 
   return (
-    <main className="bg-light w-screen h-screen font-lato pt-24">
+    <main className="bg-light w-screen h-screen font-lato">
+      <div className="w-100 h-24 pt-6">
+        {message.text ? 
+          <div className={`${message.isError ? "bg-red" : "bg-cyan"} rounded-3xl text-white text-center h-12 w-72 mx-auto py-3 font-bold shadow-inverted-light-field transition-all ease-in-out duration-300`}>
+            {message.text}
+          </div> : null
+        }
+      </div>
       <div className="w-3/4 sm:w-96 bg-light mx-auto rounded-3xl shadow-light-card">
         <div className="text-center">
           <input className="rounded-3xl w-3/4 h-12 px-4 text-gray-700 leading-tight my-6 bg-light shadow-light-field focus:shadow-inverted-light-field focus:outline-none active:shadow-none transition-shadow ease-in-out duration-200" 
-          id="acronym" type="text" placeholder="Acronym" onChange={(e) => setAcronym(e.target.value)}/>
+          id="acronym" type="text" placeholder="Acronym" onChange={(e) => setAcronym(e.target.value)} maxLength={15}/>
           <input className="rounded-3xl w-3/4 h-12 px-4 text-gray-700 leading-tight mb-6 bg-light shadow-light-field focus:shadow-inverted-light-field focus:outline-none active:shadow-none transition-shadow ease-in-out duration-200"
           id="expanded" type="text" placeholder="Expanded" onChange={(e) => setExpanded(e.target.value)}/>
           <textarea className="rounded-3xl py-3 w-3/4 h-44 px-4 text-gray-700 leading-tight mb-6 bg-light shadow-light-field focus:shadow-inverted-light-field focus:outline-none active:shadow-none transition-shadow ease-in-out duration-200" 
@@ -69,7 +76,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="">{message ? <p>{message}</p> : null}</div>
     </main>
   )
 }
