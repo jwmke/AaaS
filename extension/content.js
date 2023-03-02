@@ -7,10 +7,17 @@ expanderElement.setAttribute(
     JSON.stringify(markerPosition)
   );
 
+const setText = (text) =>
+  expanderElement.setAttribute(
+      "text",
+      JSON.stringify(text)
+    );
+
 const getSelectedText = () => window.getSelection().toString();
 
 document.addEventListener("click", () => {
   if (getSelectedText().length > 0) {
+    setText(getSelectedText());
     setMarkerPosition(getMarkerPosition());
   }
 });
@@ -27,7 +34,6 @@ function getMarkerPosition() {
     .getRangeAt(0)
     .getBoundingClientRect();
   return {
-    // Substract width of marker button -> 40px / 2 = 20
     left: rangeBounds.left + (rangeBounds.width / 2),
     top: rangeBounds.top - 32,
     display: "flex",

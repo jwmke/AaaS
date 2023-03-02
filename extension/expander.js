@@ -1,13 +1,3 @@
-// import PocketBase from 'pocketbase'
-
-// const pb = new PocketBase('http://127.0.0.1:8090');
-
-const template = `
-  <div id="expander">
-    Hello World
-  </div>
-`;
-
 const styled = ({ display = "none", left = 0, top = 0 }) => `
   #expander {
     align-items: center;
@@ -23,7 +13,7 @@ const styled = ({ display = "none", left = 0, top = 0 }) => `
     padding: 0 1.5rem;
     z-index: 9999;
     transform: translate(-50%);
-    box-shadow: -8px -8px 8px 0 rgba(255, 255, 255, 0.4), 6px 6px 8px 0 rgba(0, 0, 0, .15);
+    box-shadow: 6px 6px 8px 0 rgba(0, 0, 0, .15);
   }
   .text-marker {
     fill: white;
@@ -45,7 +35,7 @@ class Expander extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ["markerPosition"];
+    return ["markerPosition", "text"];
   }
 
   highlightSelection() {
@@ -56,12 +46,15 @@ class Expander extends HTMLElement {
     window.getSelection().empty();
   }
 
-  render() {
+  render() { 
     this.attachShadow({ mode: "open" });
     const style = document.createElement("style");
     style.textContent = styled({});
     this.shadowRoot.appendChild(style);
-    this.shadowRoot.innerHTML += template;
+    this.shadowRoot.innerHTML += `
+    <div id="expander">
+    </div>
+  `;
     this.shadowRoot
       .getElementById("expander")
       .addEventListener("click", () => this.highlightSelection());
@@ -70,6 +63,23 @@ class Expander extends HTMLElement {
   attributeChangedCallback(name, oldValue, newValue) {
     if (name === "markerPosition") {
       this.styleElement.textContent = styled(this.markerPosition);
+    }
+    if (name === "text") {
+      this.shadowRoot.getElementById("expander").textContent = "";
+      let key = this.getAttribute("text").replace(/['"\s\.]+/g, '').toUpperCase();
+      if (key.length > 15) {
+        this.shadowRoot.getElementById("expander").textContent = "No Acronym Found";
+      } else {
+        key = `${key}${"0".repeat(15-key.length)}`;
+        fetch(`http://127.0.0.1:8090/api/collections/acronyms/records/${key}`).then(r => r.text()).then(result => {
+        const jsonRes = JSON.parse(result);
+          if (jsonRes.code) {
+            this.shadowRoot.getElementById("expander").textContent = "No Acronym Found";
+          } else {
+            this.shadowRoot.getElementById("expander").textContent = jsonRes.expanded;
+          }
+        })
+      }
     }
   }
 }
