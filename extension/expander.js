@@ -76,7 +76,7 @@ class Expander extends HTMLElement {
       let key = this.getAttribute("text").replace(/['"\s\.]+/g, '').toUpperCase();
       if (key.length <= 15) {
         key = `${key}${"0".repeat(15-key.length)}`;
-        fetch(`http://127.0.0.1:8090/api/collections/acronyms/records/${key}`).then(r => r.text()).then(result => {
+        fetch(`https://aaas.fly.dev/api/collections/acronyms/records/${key}`).then(r => r.text()).then(result => {
         const jsonRes = JSON.parse(result);
           if (jsonRes.code) {
             this.shadowRoot.getElementById("expander").textContent = "No Acronym Found";
