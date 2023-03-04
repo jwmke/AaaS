@@ -19,9 +19,9 @@ module.exports = {
       "light-card":
         "-8px -8px 16px 0 rgba(255, 255, 255, 0.4), 12px 12px 16px 0 rgba(0, 0, 0, .15)",
       "light-field":
-        "-8px -8px 8px 0 rgba(255, 255, 255, 0.4) inset, 6px 6px 8px 0 rgba(0, 0, 0, .15) inset",
+        "-8px -8px 8px 0 rgba(255, 255, 255, 0.4) inset, 6px 6px 8px 0 rgba(0, 0, 0, .15) inset, 0px 0px 0px 0 rgba(255, 255, 255, 0.4), 0px 0px 0px 0 rgba(0, 0, 0, .15)",
       "inverted-light-field":
-        "-8px -8px 8px 0 rgba(255, 255, 255, 0.4), 6px 6px 8px 0 rgba(0, 0, 0, .15)"
+        "inset 0px 0px 0px 0 rgba(255, 255, 255, 0.4), inset 0px 0px 0px 0 rgba(0, 0, 0, .15), -8px -8px 8px 0 rgba(255, 255, 255, 0.4), 6px 6px 8px 0 rgba(0, 0, 0, .15)"
     },
   },
   plugins: [],
