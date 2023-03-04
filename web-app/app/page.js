@@ -113,7 +113,7 @@ export default function Home() {
           }
         </div>
         <div className="text-center">
-          <p className={`text-2xl text-cyan ${authenticated && !addMode ? "" : "mb-6"} pt-3`}>
+          <p className={`text-md font-bold pt-4 sm:font-normal sm:text-2xl text-cyan ${authenticated && !addMode ? "" : "mb-6"} sm:pt-3`}>
             Acronyms as a Service
           </p>
           {authenticated && !addMode ? null : <input className="!outline-none rounded-3xl w-3/4 h-12 px-4 text-gray-700 leading-tight mb-6 bg-light shadow-light-field focus:shadow-inverted-light-field focus:outline-none active:shadow-none transition-all ease-in-out duration-300" 
