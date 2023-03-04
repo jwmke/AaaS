@@ -10,7 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@webcomponents/custom-elements": "^1.5.1",
-    "pocketbase": "^0.11.1"
+    "@webcomponents/custom-elements": "^1.5.1"
   }
 }

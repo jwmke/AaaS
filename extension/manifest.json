@@ -1,6 +1,6 @@
 {
     "name": "Acronyms as a Service",
-    "description": "Highlight acronyms to find their expanded definition.",
+    "description": "Highlight acronyms to find their expanded definitions.",
     "version": "1.0.0",
     "manifest_version": 3,
     "content_scripts": [
@@ -14,7 +14,7 @@
       }
     ],
     "host_permissions": [
-      "http://127.0.0.1:8090/*"
+      "https://aaas.fly.dev/*"
     ],
     "icons": {
       "16": "16.png",
